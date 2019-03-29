@@ -5,15 +5,20 @@ pfUI:RegisterModule("EliteOverlay", function ()
     "off:" .. T["Disabled"]
   }
 
-  pfUI.gui.tabs.thirdparty.tabs.EliteOverlay = pfUI.gui.tabs.thirdparty.tabs:CreateTabChild("EliteOverlay", true)
-  pfUI.gui.tabs.thirdparty.tabs.EliteOverlay:SetScript("OnShow", function()
-    if not this.setup then
-      local CreateConfig = pfUI.gui.CreateConfig
-      local update = pfUI.gui.update
-      CreateConfig(update['EliteOverlay'], this, T["Select dragon position"], C.EliteOverlay, "position", "dropdown", pfUI.gui.dropdowns.EliteOverlay_positions)
-      this.setup = true
-    end
-  end)
+  if pfUI.gui.CreateGUIEntry then -- new pfUI
+    pfUI.gui.CreateGUIEntry(T["Thirdparty"], T["Elite Overlay"], function()
+      pfUI.gui.CreateConfig(nil, T["Select dragon position"], C.EliteOverlay, "position", "dropdown", pfUI.gui.dropdowns.EliteOverlay_positions)
+    end)
+  else -- old pfUI
+    pfUI.gui.tabs.thirdparty.tabs.EliteOverlay = pfUI.gui.tabs.thirdparty.tabs:CreateTabChild("EliteOverlay", true)
+    pfUI.gui.tabs.thirdparty.tabs.EliteOverlay:SetScript("OnShow", function()
+      if not this.setup then
+        local CreateConfig = pfUI.gui.CreateConfig
+        local update = pfUI.gui.update
+        this.setup = true
+      end
+    end)
+  end
 
   pfUI:UpdateConfig("EliteOverlay",       nil,         "position",   "right")
 
