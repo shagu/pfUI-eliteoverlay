@@ -1,9 +1,21 @@
-pfUI:RegisterModule("EliteOverlay", function ()
+pfUI:RegisterModule("EliteOverlay", "vanilla:tbc", function ()
   pfUI.gui.dropdowns.EliteOverlay_positions = {
     "left:" .. T["Left"],
     "right:" .. T["Right"],
     "off:" .. T["Disabled"]
   }
+
+  -- detect current addon path
+  local addonpath
+  local tocs = { "", "-master", "-tbc", "-wotlk" }
+  for _, name in pairs(tocs) do
+    local current = string.format("pfUI-eliteoverlay%s", name)
+    local _, title = GetAddOnInfo(current)
+    if title then
+      addonpath = "Interface\\AddOns\\" .. current
+      break
+    end
+  end
 
   if pfUI.gui.CreateGUIEntry then -- new pfUI
     pfUI.gui.CreateGUIEntry(T["Thirdparty"], T["Elite Overlay"], function()
@@ -38,7 +50,7 @@ pfUI:RegisterModule("EliteOverlay", function ()
       unit.dragonTop = unit:CreateTexture(nil, "OVERLAY")
       unit.dragonTop:SetWidth(size)
       unit.dragonTop:SetHeight(size)
-      unit.dragonTop:SetTexture("Interface\\AddOns\\pfUI-eliteoverlay\\TOP"..pos)
+      unit.dragonTop:SetTexture(addonpath.."\\TOP"..pos)
       unit.dragonTop:SetPoint("TOP"..pos, unit, "TOP"..pos, invert*size/5, size/7)
       unit.dragonTop:SetParent(unit.hp.bar)
     end
@@ -47,7 +59,7 @@ pfUI:RegisterModule("EliteOverlay", function ()
       unit.dragonBottom = unit:CreateTexture(nil, "OVERLAY")
       unit.dragonBottom:SetWidth(size)
       unit.dragonBottom:SetHeight(size)
-      unit.dragonBottom:SetTexture("Interface\\AddOns\\pfUI-eliteoverlay\\BOTTOM"..pos)
+      unit.dragonBottom:SetTexture(addonpath.."\\BOTTOM"..pos)
       unit.dragonBottom:SetPoint("BOTTOM"..pos, unit, "BOTTOM"..pos, invert*size/5.2, -size/2.98)
       unit.dragonBottom:SetParent(unit.hp.bar)
     end
