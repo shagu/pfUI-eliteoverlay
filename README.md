@@ -19,4 +19,4 @@ An extension for pfUI which adds dragon textures to elite, rare and worldbosses.
 5. Restart Wow
 
 ## Credits
-Artwork by @eNtreDefias
+Artwork by [GaMu-ChAn](https://www.deviantart.com/gamu-chan/art/WOW-Elite-frame-143568653)
