@@ -45,7 +45,7 @@ pfUI:RegisterModule("EliteOverlay", "vanilla:tbc", function ()
 
     unit.dragon = unit.dragon or CreateFrame("Frame", nil, unit)
     unit.dragon:SetAllPoints(unit)
-    unit.dragon:SetFrameLevel(16)
+    unit.dragon:SetFrameLevel(8)
 
     unit.dragonTop = unit.dragonTop or unit.dragon:CreateTexture(nil, "OVERLAY")
     unit.dragonBottom = unit.dragonBottom or unit.dragon:CreateTexture(nil, "OVERLAY")
